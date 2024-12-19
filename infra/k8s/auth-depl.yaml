@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: auth-depl
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: auth
@@ -14,7 +14,13 @@ spec:
     spec:
       containers:
       - name: auth
-        image: itzkaustubh/auth
+        image: us.gcr.io/ticketing-dev-445210/auth
+        env:
+        - name: JWT_KEY
+          valueFrom:
+            secretKeyRef:
+              name: jwt-secret
+              key: JWT_KEY
 ---
 apiVersion: v1
 kind: Service

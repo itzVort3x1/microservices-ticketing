@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: auth
-        image: us.gcr.io/ticketing-dev-445210/auth
+        image: itzkaustubh/auth
         env:
         - name: JWT_KEY
           valueFrom:

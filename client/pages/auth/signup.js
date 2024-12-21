@@ -8,12 +8,16 @@ const signup = () => {
     const onSubmit = async (event) => {
         event.preventDefault();
 
-        const response = await axios.post("/api/users/signup", {
-            email,
-            password,
-        });
+        try {
+            const response = await axios.post("/api/users/signup", {
+                email,
+                password,
+            });
 
-        console.log(response.data);
+            console.log(response.data);
+        } catch (error) {
+            console.log(error.response.data);
+        }
     };
 
     return (

@@ -26,4 +26,4 @@ AppComponent.getInitialProps = async (context) => {
     };
 };
 
-export default MyApp;
+export default AppComponent;

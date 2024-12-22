@@ -3,8 +3,8 @@ import Link from "next/link";
 const Header = ({ currentUser }) => {
     return (
         <nav className="navbar navbar-light bg-light">
-            <Link href="/">
-                <a className="navbar-brand">GitTix</a>
+            <Link href="/" className="navbar-brand">
+                GitTix
             </Link>
 
             <div className="d-flex justify-content-end">
@@ -12,31 +12,31 @@ const Header = ({ currentUser }) => {
                     {currentUser ? (
                         <>
                             <li className="nav-item">
-                                <Link href="/tickets/new">
-                                    <a className="nav-link">Sell Tickets</a>
+                                <Link className="nav-link" href="/tickets/new">
+                                    Sell Tickets
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link href="/orders">
-                                    <a className="nav-link">My Orders</a>
+                                <Link className="nav-link" href="/orders">
+                                    My Orders
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link href="/auth/signout">
-                                    <a className="nav-link">Sign Out</a>
+                                <Link className="nav-link" href="/auth/signout">
+                                    Sign Out
                                 </Link>
                             </li>
                         </>
                     ) : (
                         <>
                             <li className="nav-item">
-                                <Link href="/auth/signup">
-                                    <a className="nav-link">Sign Up</a>
+                                <Link className="nav-link" href="/auth/signup">
+                                    Sign Up
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link href="/auth/signin">
-                                    <a className="nav-link">Sign In</a>
+                                <Link className="nav-link" href="/auth/signin">
+                                    Sign In
                                 </Link>
                             </li>
                         </>

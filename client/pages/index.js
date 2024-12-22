@@ -13,7 +13,7 @@ LandingPage.getInitialProps = async (context) => {
 
     const { data } = client.get("/api/users/currentuser");
 
-    return data;
+    return { data };
 };
 
 export default LandingPage;

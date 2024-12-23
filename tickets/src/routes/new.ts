@@ -8,12 +8,15 @@ const router = express.Router();
 router.post(
     "/api/tickets",
     requireAuth,
-    [body("title").notEmpty().withMessage("Title is required")],
+    [
+        body("title").notEmpty().withMessage("Title is required"),
+        body("price")
+            .isFloat({ gt: 0 })
+            .withMessage("Price must be greater than 0"),
+    ],
     validateRequest,
     async (req: Request, res: Response) => {
         const { title, price } = req.body;
-
-        console.log(title, price);
 
         const ticket = Ticket.build({
             title,

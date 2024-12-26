@@ -3,6 +3,9 @@ import { app } from "../../app";
 import mongoose from "mongoose";
 import { Order, OrderStatus } from "../../models/order";
 import { Ticket } from "../../models/tickets";
+import { natsWrapper } from "../../nats-wrapper";
+
+jest.mock("../../nats-wrapper");
 
 describe("Orders Module new route.ts", () => {
     it("returns an error if an order does not exist", async () => {
@@ -59,5 +62,22 @@ describe("Orders Module new route.ts", () => {
             .expect(201);
     });
 
-    it.todo("emits an order created event");
+    it("emits an order created event", async () => {
+        const ticket = Ticket.build({
+            title: "concert",
+            price: 20,
+        });
+
+        await ticket.save();
+
+        await request(app)
+            .post("/api/orders")
+            .set("Cookie", global.signin())
+            .send({
+                ticketId: ticket.id,
+            })
+            .expect(201);
+
+        expect(natsWrapper.client.publish).toHaveBeenCalled;
+    });
 });

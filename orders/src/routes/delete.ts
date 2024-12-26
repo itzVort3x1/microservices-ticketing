@@ -5,6 +5,8 @@ import {
     NotFoundError,
     requireAuth,
 } from "@kaustubhtech/common";
+import { OrderCancelledPublisher } from "../events/publishers/order-cancelled-publisher";
+import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 
@@ -14,7 +16,7 @@ router.delete(
     async (req: Request, res: Response) => {
         const { orderId } = req.params;
 
-        const order = await Order.findById(orderId);
+        const order = await Order.findById(orderId).populate("ticket");
 
         if (!order) {
             throw new NotFoundError();
@@ -29,6 +31,12 @@ router.delete(
         await order.save();
 
         // Publish an event saying that the order was cancelled
+        new OrderCancelledPublisher(natsWrapper.client).publish({
+            id: order.id,
+            ticket: {
+                id: order.ticket.id,
+            },
+        });
 
         res.send(204).send(order);
     }

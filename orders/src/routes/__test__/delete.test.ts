@@ -9,6 +9,7 @@ describe("Orders module delete route", () => {
     it("marks an order as cancelled", async () => {
         // Create a ticket
         const ticket = Ticket.build({
+            id: new mongoose.Types.ObjectId().toHexString(),
             title: "concert",
             price: 20,
         });
@@ -40,6 +41,7 @@ describe("Orders module delete route", () => {
     it("emits an order cancelled event", async () => {
         // Create a ticket
         const ticket = Ticket.build({
+            id: new mongoose.Types.ObjectId().toHexString(),
             title: "concert",
             price: 20,
         });

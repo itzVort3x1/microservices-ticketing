@@ -8,6 +8,7 @@ describe("Orders module show route", () => {
     it("fetches the order", async () => {
         // Create a ticket
         const ticket = Ticket.build({
+            id: new mongoose.Types.ObjectId().toHexString(),
             title: "concert",
             price: 20,
         });
@@ -37,6 +38,7 @@ describe("Orders module show route", () => {
     it("returns an error if one user tries to fetch another users order", async () => {
         // Create a ticket
         const ticket = Ticket.build({
+            id: new mongoose.Types.ObjectId().toHexString(),
             title: "concert",
             price: 20,
         });
